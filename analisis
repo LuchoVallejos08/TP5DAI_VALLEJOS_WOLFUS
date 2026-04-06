@@ -1,0 +1,5 @@
+El analisis de las URLs se dio mediante la lectura y entendimiento del material tecnico que Pokeapi tiene disponible.
+
+Los breakpoints devuelven distintos datos, a veces un objeto solo y a veces varios, dependiendo de que parametro le pasemos. Si le pasamos un nombre o id devuelve un objeto solo, por otro lado, si pasamos un offset o un tipo devuelve todos los que coincidan dentro de de lo pedido
+
+Ante un error aparece status 400 dado que es un Bad Request o 404 si la sintaxis es buena pero no se encuentra datos que coincidan
