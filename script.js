@@ -13,7 +13,7 @@ const pokemones = [
     tipos: ["fire"],
     peso: 8.5,
     altura: 0.6,
-    imagen: "./imagen/"
+    imagen: "./imagen/004.png"
   },
   {
     id: 7,
@@ -21,7 +21,7 @@ const pokemones = [
     tipos: ["water"],
     peso: 9,
     altura: 0.5,
-    imagen: "./imagen/"
+    imagen: "./imagen/007.png"
   },
   {
     id: 25,
@@ -29,7 +29,7 @@ const pokemones = [
     tipos: ["electric"],
     peso: 6,
     altura: 0.4,
-    imagen: "./imagen/"
+    imagen: "./imagen/025.png"
   },
   {
     id: 39,
@@ -37,7 +37,7 @@ const pokemones = [
     tipos: ["normal", "fairy"],
     peso: 5.5,
     altura: 0.5,
-    imagen: "./imagen/"
+    imagen: "./imagen/039.png"
   },
   {
     id: 52,
@@ -45,7 +45,7 @@ const pokemones = [
     tipos: ["normal"],
     peso: 4.2,
     altura: 0.4,
-    imagen: "./imagen/"
+    imagen: "./imagen/052.png"
   },
   {
     id: 94,
@@ -53,7 +53,7 @@ const pokemones = [
     tipos: ["ghost", "poison"],
     peso: 40.5,
     altura: 1.5,
-    imagen: "./imagen/"
+    imagen: "./imagen/094.png"
   },
   {
     id: 131,
@@ -61,7 +61,7 @@ const pokemones = [
     tipos: ["water", "ice"],
     peso: 220,
     altura: 2.5,
-    imagen: "./imagen/"
+    imagen: "./imagen/131.png"
   },
   {
     id: 133,
@@ -69,7 +69,7 @@ const pokemones = [
     tipos: ["normal"],
     peso: 6.5,
     altura: 0.3,
-    imagen: "./imagen/"
+    imagen: "./imagen/133.png"
   },
   {
     id: 150,
@@ -77,7 +77,7 @@ const pokemones = [
     tipos: ["psychic"],
     peso: 122,
     altura: 2,
-    imagen: "./imagen/"
+    imagen: "./imagen/150.png"
   }
 ];
 
@@ -106,3 +106,13 @@ function buscarPokemon() {
 }
 
 document.getElementById("btnBuscar").addEventListener("click", buscarPokemon);
+
+const ingresoInput = document.getElementById("ingreso");
+if (ingresoInput) {
+  ingresoInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      buscarPokemon();
+    }
+  });
+}
