@@ -1,108 +1,26 @@
-const pokemones = [
-  {
-    id: 1,
-    nombre: "Bulbasaur",
-    tipos: ["grass", "poison"],
-    peso: 6.9,
-    altura: 0.7,
-    imagen: "./imagen/001.png"
-  },
-  {
-    id: 4,
-    nombre: "Charmander",
-    tipos: ["fire"],
-    peso: 8.5,
-    altura: 0.6,
-    imagen: "./imagen/004.png"
-  },
-  {
-    id: 7,
-    nombre: "Squirtle",
-    tipos: ["water"],
-    peso: 9,
-    altura: 0.5,
-    imagen: "./imagen/007.png"
-  },
-  {
-    id: 25,
-    nombre: "Pikachu",
-    tipos: ["electric"],
-    peso: 6,
-    altura: 0.4,
-    imagen: "./imagen/025.png"
-  },
-  {
-    id: 39,
-    nombre: "Jigglypuff",
-    tipos: ["normal", "fairy"],
-    peso: 5.5,
-    altura: 0.5,
-    imagen: "./imagen/039.png"
-  },
-  {
-    id: 52,
-    nombre: "Meowth",
-    tipos: ["normal"],
-    peso: 4.2,
-    altura: 0.4,
-    imagen: "./imagen/052.png"
-  },
-  {
-    id: 94,
-    nombre: "Gengar",
-    tipos: ["ghost", "poison"],
-    peso: 40.5,
-    altura: 1.5,
-    imagen: "./imagen/094.png"
-  },
-  {
-    id: 131,
-    nombre: "Lapras",
-    tipos: ["water", "ice"],
-    peso: 220,
-    altura: 2.5,
-    imagen: "./imagen/131.png"
-  },
-  {
-    id: 133,
-    nombre: "Eevee",
-    tipos: ["normal"],
-    peso: 6.5,
-    altura: 0.3,
-    imagen: "./imagen/133.png"
-  },
-  {
-    id: 150,
-    nombre: "Mewtwo",
-    tipos: ["psychic"],
-    peso: 122,
-    altura: 2,
-    imagen: "./imagen/150.png"
-  }
-];
+async function obtenerDatos() {
+  try {
+    document.getElementById("resultado").style.display = "block";   
+    const input = document.getElementById("ingreso");
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon/" + input.value);
+    const data = await response.json();
+        document.getElementById("pokeImagen").src = data.sprites.front_default;
+        document.getElementById("pokeNombre").textContent = data.name;
+        const tipos = []; 
+        data.types.forEach(element => {
+          tipos.push(element.type.name);
+        });
+        document.getElementById("pokeTipos").textContent = tipos;
+        document.getElementById("pokePeso").textContent = `Peso: ${data.weight} kg`;
+
+  } catch (error) {
+    const errorM = document.getElementById("error");
+    errorM = "no se encontro el pokemon"
+    }
+}
 
 function buscarPokemon() {
-    const input = document.getElementById("ingreso").value.toLowerCase();
-    const resultado = document.getElementById("resultado");
-    const error = document.getElementById("error");
-
-    const pokemon = pokemones.find(p => p.nombre.toLowerCase() === input);
-
-    if (pokemon) {
-        document.getElementById("pokeImagen").src = pokemon.imagen;
-        document.getElementById("pokeImagen").alt = pokemon.nombre;
-        document.getElementById("pokeNombre").textContent = pokemon.nombre;
-        document.getElementById("pokeId").textContent = `ID: ${pokemon.id}`;
-        document.getElementById("pokeTipos").textContent = `Tipos: ${pokemon.tipos.join(" - ")}`;
-        document.getElementById("pokePeso").textContent = `Peso: ${pokemon.peso} kg`;
-        document.getElementById("pokeAltura").textContent = `Altura: ${pokemon.altura} m`;
-
-        resultado.style.display = "block";
-        error.style.display = "none";
-    } else {
-        resultado.style.display = "none";
-        error.style.display = "block";
-    }
+obtenerDatos();
 }
 
 document.getElementById("btnBuscar").addEventListener("click", buscarPokemon);
@@ -112,7 +30,7 @@ if (ingresoInput) {
   ingresoInput.addEventListener("keydown", function(e) {
     if (e.key === "Enter") {
       e.preventDefault();
-      buscarPokemon();
+      obtenerDatos();
     }
   });
 }

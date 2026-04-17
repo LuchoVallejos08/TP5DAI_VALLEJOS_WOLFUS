@@ -79,3 +79,7 @@ footer{margin-top:20px;color:var(--muted);font-size:0.9rem}
 
 /* utility */
 .hidden{display:none !important}
+
+div{
+	display: block;
+}
