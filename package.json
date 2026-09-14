@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "http-server -p 8080 -o"
+    "dev": "http-server -p 8080 -o",
+    "swagger-autogen": "node swagger.js",
+    "start": "node server.js"
   },
   "devDependencies": {
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "swagger-autogen": "^2.23.7"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "swagger-ui-express": "^5.0.1"
   }
 }

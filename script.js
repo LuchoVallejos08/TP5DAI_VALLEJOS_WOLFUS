@@ -2,7 +2,7 @@ async function obtenerDatos() {
   try {
     document.getElementById("error").style.display = "none";
     const input = document.getElementById("ingreso");
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon/" + input.value);
+    const response = await fetch("/api/pokemon/" + input.value);
     if (!response.ok) {
       throw new Error("no se encontro el pokemon");
     }

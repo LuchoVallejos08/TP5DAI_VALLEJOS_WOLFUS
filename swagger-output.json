@@ -1,0 +1,427 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Tatodex API",
+    "description": "API propia que envuelve la PokeAPI para el proyecto Tatodex. Documentada con swagger-autogen y swagger-ui-express.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Pokemon",
+      "description": "Consultas de pokémon"
+    },
+    {
+      "name": "Type",
+      "description": "Consultas de tipos"
+    },
+    {
+      "name": "Ability",
+      "description": "Consultas de habilidades"
+    },
+    {
+      "name": "Evolution",
+      "description": "Consultas de cadenas de evolución"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/pokemon": {
+      "get": {
+        "tags": [
+          "Pokemon"
+        ],
+        "summary": "Lista paginada de pokémon",
+        "description": "Devuelve un listado paginado de pokémon (nombre y URL de detalle), delegando en la PokeAPI.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Cantidad máxima de resultados a devolver",
+            "type": "integer",
+            "example": 20
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Cantidad de resultados a saltear (paginación)",
+            "type": "integer",
+            "example": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listado obtenido correctamente",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "number",
+                  "example": 1302
+                },
+                "next": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "previous": {},
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "ditto"
+                      },
+                      "url": {
+                        "type": "string",
+                        "example": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/pokemon/{idOrName}": {
+      "get": {
+        "tags": [
+          "Pokemon"
+        ],
+        "summary": "Detalle de un pokémon",
+        "description": "Obtiene la información de un pokémon puntual por nombre o id numérico.",
+        "parameters": [
+          {
+            "name": "idOrName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Nombre (ej: ditto) o id numérico (ej: 235) del pokémon",
+            "example": "ditto"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pokémon encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 132
+                },
+                "name": {
+                  "type": "string",
+                  "example": "ditto"
+                },
+                "weight": {
+                  "type": "number",
+                  "example": 40
+                },
+                "height": {
+                  "type": "number",
+                  "example": 3
+                },
+                "sprites": {
+                  "type": "object",
+                  "properties": {
+                    "front_default": {
+                      "type": "string",
+                      "example": "string"
+                    }
+                  }
+                },
+                "types": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "slot": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "type": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "normal"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontró el pokémon"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/type": {
+      "get": {
+        "tags": [
+          "Type"
+        ],
+        "summary": "Lista de tipos de pokémon",
+        "description": "Devuelve el listado completo de tipos existentes (fuego, agua, planta, etc).",
+        "responses": {
+          "200": {
+            "description": "Listado obtenido correctamente",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "number",
+                  "example": 20
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "fire"
+                      },
+                      "url": {
+                        "type": "string",
+                        "example": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/type/{idOrName}": {
+      "get": {
+        "tags": [
+          "Type"
+        ],
+        "summary": "Detalle de un tipo",
+        "description": "Obtiene un tipo por nombre o id, incluyendo el listado de pokémon que pertenecen a ese tipo.",
+        "parameters": [
+          {
+            "name": "idOrName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Nombre (ej: fire) o id numérico (ej: 3) del tipo",
+            "example": "fire"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tipo encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 10
+                },
+                "name": {
+                  "type": "string",
+                  "example": "fire"
+                },
+                "pokemon": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "pokemon": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "charmander"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "string"
+                          }
+                        }
+                      },
+                      "slot": {
+                        "type": "number",
+                        "example": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontró el tipo"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/ability/{idOrName}": {
+      "get": {
+        "tags": [
+          "Ability"
+        ],
+        "summary": "Detalle de una habilidad",
+        "description": "Obtiene la información de una habilidad (ability) por nombre o id.",
+        "parameters": [
+          {
+            "name": "idOrName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Nombre (ej: static) o id numérico (ej: 9) de la habilidad",
+            "example": "static"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Habilidad encontrada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 9
+                },
+                "name": {
+                  "type": "string",
+                  "example": "static"
+                },
+                "effect_entries": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "pokemon": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontró la habilidad"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/evolution/{id}": {
+      "get": {
+        "tags": [
+          "Evolution"
+        ],
+        "summary": "Cadena de evolución",
+        "description": "Obtiene la cadena de evolución completa a partir de su id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Id numérico de la cadena de evolución",
+            "example": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cadena de evolución encontrada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 3
+                },
+                "chain": {
+                  "type": "object",
+                  "properties": {
+                    "species": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "example": "venusaur"
+                        },
+                        "url": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "evolves_to": {
+                      "type": "array",
+                      "example": [],
+                      "items": {}
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Id inválido"
+          },
+          "404": {
+            "description": "No se encontró la cadena de evolución"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    }
+  }
+}
