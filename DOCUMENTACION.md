@@ -86,9 +86,9 @@ Ejemplo de modelo documentado para el endpoint de detalle de pokémon:
 
 ## 5. Prueba de los endpoints
 
-_(Completar con capturas de Swagger UI tras ejecutar `npm start` y abrir `/api-docs`)_
+!(./imagen/Tipos.png)
 
-- **GET simple:** `GET /api/type` → 200, devuelve el listado de 20 tipos.
+- **GET simple:** `GET /api/type` → 200, 0.
 - **GET con parámetro de ruta:** `GET /api/pokemon/ditto` → 200, devuelve la ficha de Ditto.
 - **GET con parámetros de consulta:** `GET /api/pokemon?limit=5&offset=0` → 200, devuelve 5 resultados.
 - **Caso de error 404:** `GET /api/pokemon/noexiste123` → 404, `{ "error": "No se encontró el pokémon" }`.
