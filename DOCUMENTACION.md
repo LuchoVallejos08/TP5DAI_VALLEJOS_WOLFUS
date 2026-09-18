@@ -8,6 +8,8 @@
 - **URL base de la API propia:** `http://localhost:3000/api`
 - **URL base de la API externa que consume por detrás:** `https://pokeapi.co/api/v2`
 
+- **URL PARA ACCEDER A LA DOCUMENTACION EN SWAGGER** `http://localhost:3000/api-docs` 
+
 ### Endpoints
 
 | Método | Endpoint                  | Descripción                                                                 |
