@@ -86,6 +86,12 @@ Ejemplo de modelo documentado para el endpoint de detalle de pokémon:
 
 ## 5. Prueba de los endpoints
 
+Las capturas fueron tomadas desde el propio Visual Studio, aun así, adjunto pruebas que corre en web
+
+![Web](./imagen/Web.png)
+
+Ahora si, las imagenes de los endpoints
+
 ![Tipos de Pokémon](./imagen/Tipos.png)
 - **GET simple:** `GET /api/type` → 200, 0.
 
